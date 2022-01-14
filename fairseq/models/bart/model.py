@@ -6,6 +6,7 @@
 BART: Denoising Sequence-to-Sequence Pre-training for
 Natural Language Generation, Translation, and Comprehension
 """
+from json import encoder
 from typing import Optional
 
 import logging
@@ -94,6 +95,7 @@ class BARTModel(TransformerModel):
         )
         print("Keys of encoder_out:", encoder_out.keys())
         print("Length of encoder_out:", len(encoder_out["encoder_out"]))
+        print("Shape of encoder_out:", encoder_out[0].shape)])
 
         x, extra = self.decoder(
             prev_output_tokens,
@@ -115,6 +117,8 @@ class BARTModel(TransformerModel):
                 if k == classification_head_name:
                     x = head(sentence_representation)
                     break
+        print("Shape of logits:", x.shape)
+        
         return x, extra
 
     @classmethod
