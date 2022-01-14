@@ -93,6 +93,8 @@ class BARTModel(TransformerModel):
             return_all_hiddens=return_all_hiddens,
         )
         print("Keys of encoder_out:", encoder_out.keys())
+        print("Shape of encoder_out:", encoder_out["encoder_out"].shape)
+
         x, extra = self.decoder(
             prev_output_tokens,
             encoder_out=encoder_out,
@@ -102,6 +104,7 @@ class BARTModel(TransformerModel):
             src_lengths=src_lengths,
             return_all_hiddens=return_all_hiddens,
         )
+        print("Shape of decoder output:", x.shape)
         eos: int = self.eos
         if classification_head_name is not None:
             sentence_representation = x[src_tokens.eq(eos), :].view(
