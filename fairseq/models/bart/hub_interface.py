@@ -166,6 +166,8 @@ class BARTHubInterface(GeneratorHubInterface):
         ].view(features.size(0), -1, features.size(-1))[:, -1, :]
 
         logits = self.model.classification_heads[head](sentence_representation)
+        print("Shape of logits:", logits.shape)
+        print("Raw logits:", logits)
         if return_logits:
             return logits
         return F.log_softmax(logits, dim=-1)

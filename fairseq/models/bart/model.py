@@ -97,6 +97,7 @@ class BARTModel(TransformerModel):
         print("Length of encoder_out:", len(encoder_out["encoder_out"]))
         assert isinstance(encoder_out["encoder_out"], list)
         print("Shape of encoder_out:", encoder_out["encoder_out"][0].shape)
+        print("First elements of encoder_out:", encoder_out["encoder_out"][0][0,:3,:3])
 
         x, extra = self.decoder(
             prev_output_tokens,
@@ -118,7 +119,6 @@ class BARTModel(TransformerModel):
                 if k == classification_head_name:
                     x = head(sentence_representation)
                     break
-        print("Shape of logits:", x.shape)
         
         return x, extra
 
