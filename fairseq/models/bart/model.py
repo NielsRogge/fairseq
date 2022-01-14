@@ -95,7 +95,8 @@ class BARTModel(TransformerModel):
         )
         print("Keys of encoder_out:", encoder_out.keys())
         print("Length of encoder_out:", len(encoder_out["encoder_out"]))
-        print("Shape of encoder_out:", encoder_out[0].shape)])
+        assert isinstance(encoder_out["encoder_out"], list)
+        print("Shape of encoder_out:", encoder_out[0].shape))
 
         x, extra = self.decoder(
             prev_output_tokens,
