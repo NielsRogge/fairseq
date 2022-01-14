@@ -93,7 +93,7 @@ class BARTModel(TransformerModel):
             return_all_hiddens=return_all_hiddens,
         )
         print("Keys of encoder_out:", encoder_out.keys())
-        print("Shape of encoder_out:", encoder_out["encoder_out"].shape)
+        print("Length of encoder_out:", len(encoder_out["encoder_out"]))
 
         x, extra = self.decoder(
             prev_output_tokens,
